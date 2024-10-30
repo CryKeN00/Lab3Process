@@ -1,0 +1,28 @@
+ int lenght = 3;
+ Process[] process = new Process[lenght];
+ for (int i = 0; i < lenght; i++)
+ {
+     process[i] = new Process();
+ }
+ process[0].StartInfo.FileName = "C:\\Windows\\system32\\cmd.exe";
+ process[1].StartInfo.FileName = "C:\\Users\\Artem\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Steam.exe";
+ process[2].StartInfo.FileName = "notepad.exe";
+ process[0].Start();
+ process[1].Start();
+ process[2].Start();
+ foreach (Process proc in process)
+ {
+     Console.WriteLine($"ID: {proc.Id}, Name: {proc.ProcessName}, Memory: {proc.VirtualMemorySize64}");
+ }
+ try
+ {
+     foreach (Process proc in process)
+     {
+         proc.Kill();
+         Console.WriteLine($"Процесс {proc.Id}.{proc.ProcessName} завершен");
+     }
+ }
+ catch (Exception ex)
+ {
+     Console.WriteLine($"Не удалось завершить процесс : {ex.Message}");
+ }
